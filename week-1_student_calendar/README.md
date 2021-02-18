@@ -15,14 +15,14 @@ Derefter skal der laves en interaktiv container, dette gøres ved brug af følge
 
 ## Brug af programmet
 
-Følger prolog syntax, skriv f.eks. `class(ufo, Student)` for at få alle studerende der går til ufo. 
+Følger prolog syntax, skriv f.eks. `class(ufo, Student).` for at få alle studerende der går til ufo. 
 
 Der er en regel i programmet der kan bruges til at få fremvist skema information:   
 `scheduledAssignment(Student, Day, Class, Room)`
 
 Denne regel kan bruges til at få skema information om den enkelte studerende på en pågældende dag, eller flere. Eksempel brug:
 
-`scheduledAssignment(william, monday, Class, Room)`
+`scheduledAssignment(william, monday, Class, Room).`
 
 Vi har en student der hedder william, og vi vil gerne se hvad for nogle timer han har om mandagen. Dette returnere alle williams timer, samt hvilket rum det er afholdt i. 
 

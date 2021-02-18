@@ -31,9 +31,9 @@ schedule(wednesday, dbd, 202).
 schedule(thursday, dbd, 202).
 schedule(friday, ufo, 203).
 
-#Ligegyldig regel, samme resultat kan fås
-#ved at skrive class(Class, Student)
-#afhængigt af hvad man vil have ud.
+/* Ligegyldig regel, samme resultat kan fås
+ved at skrive class(Class, Student)
+afhængigt af hvad man vil have ud. */
 studies(Student, Class) :-
     student(Student),
     class(Class, Student).
