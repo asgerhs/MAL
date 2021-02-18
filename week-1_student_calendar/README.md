@@ -13,6 +13,8 @@ Derefter skal der laves en interaktiv container, dette gøres ved brug af følge
 
 `docker run -it --rm prolog`
 
+Hvis du har bygget ved at højre klikke og trykke build image så erstat prolog med det som imaget hedder, eller tryk på docker ikonet i VSCode, gå ind på imaget, højre klik det og tryk på run interactive.
+
 ## Brug af programmet
 
 Følger prolog syntax, skriv f.eks. `class(ufo, Student).` for at få alle studerende der går til ufo. 
