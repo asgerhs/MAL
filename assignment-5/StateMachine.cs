@@ -4,36 +4,34 @@ namespace assignment_5
 {
     public class StateMachine
     {
-        public bool isFinal { get; set; }
         int systemId { get; set; }
         int instanceId { get; set; }
+        public AbcdeAutomaton automaton { get; }
+        public State currentState { get; set; }
 
-        public StateMachine(bool isFinal = false, int systemId = 0, int instanceId = 0){
-            this.isFinal = isFinal;
+        public StateMachine(AbcdeAutomaton automaton, int systemId = 0, int instanceId = 0){
+            this.automaton = automaton;
             this.systemId = systemId;
             this.instanceId = instanceId; 
         }
-        public void doSomething(AbcdeAutomaton automaton, string word = "abd")
+        public void doSomething(string word = "abd")
         {
-            LogUtility lu = new LogUtility();
-            
             Random rand = new Random();
-            State state = automaton.initialState;
+            currentState = automaton.initialState;
             systemId = rand.Next();
             instanceId = rand.Next();
-            Console.WriteLine("state" + state.index);
+            Console.WriteLine("state" + currentState.index);
 
             foreach (char symbol in word.ToCharArray())
             {
-                isFinal = automaton.isFinal;
-                if (state == null)
+                if (currentState == null)
                 {
-                    lu.writeLog("logs/log.txt", true, systemId, instanceId, symbol);
+                    LogUtility.writeLog("logs/log.txt", true, systemId, instanceId, symbol);
                 }
-                state = automaton.nextState(state, symbol);
-                if (state == null) lu.writeLog("logs/log.txt", true, systemId, instanceId, symbol);
-                else lu.writeLog("logs/log.txt", false, systemId, instanceId, symbol);
-                Console.WriteLine("State" + state.index);
+                currentState = automaton.nextState(currentState, symbol);
+                if (currentState == null) LogUtility.writeLog("logs/log.txt", true, systemId, instanceId, symbol);
+                else LogUtility.writeLog("logs/log.txt", false, systemId, instanceId, symbol);
+                Console.WriteLine("State" + currentState.index);
             }
         }
     }
