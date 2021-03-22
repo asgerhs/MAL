@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace assignment_5
 {
@@ -7,18 +8,25 @@ namespace assignment_5
         static void Main(string[] args)
         {
             AbcdeAutomaton automaton = new AbcdeAutomaton();
-            String word = "abcd";
-            State state = automaton.initialState;
-            Console.WriteLine("state" + state.index);
+            List<StateMachine> sm = new List<StateMachine>();
 
-            foreach (char symbol in word.ToCharArray()) {
-                if (state == null) Console.WriteLine(word + " does not match");
-                state = automaton.nextState(state, symbol);
-                Console.WriteLine("State" + state.index);
+
+            StateMachine sm1 = new StateMachine();
+            StateMachine sm2 = new StateMachine();
+            StateMachine sm3 = new StateMachine();
+            StateMachine sm4 = new StateMachine();
+            sm.Add(sm1);
+            sm.Add(sm2);
+            sm.Add(sm3);
+            sm.Add(sm4);
+            sm1.doSomething(automaton);
+            sm2.doSomething(automaton);
+            sm3.doSomething(automaton, "ab");
+            sm4.doSomething(automaton, "a");
+            foreach(StateMachine s in sm){
+                Console.WriteLine(s.isFinal);
+                
             }
-            if (state == null) Console.WriteLine(word+" does not match");
-            else if (state.final) Console.WriteLine("You had a match");
-            else Console.WriteLine("Partially match");
         }
     }
 }

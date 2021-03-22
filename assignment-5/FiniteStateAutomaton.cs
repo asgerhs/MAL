@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace assignment_5
 {
@@ -10,6 +11,8 @@ namespace assignment_5
         public List<State> states { get; }
         public State[,] table { get; }
         public State initialState { get; }
+
+        public bool isFinal { get; set; }
         
         public AbcdeAutomaton(string regex = "A(B|C)D") {
             // A(B|C)D
@@ -59,6 +62,8 @@ namespace assignment_5
                                 parenthesesCount--;
                         }
                         idx++;
+                    } else {
+                        Console.WriteLine("sut mig");
                     }
                 }
                 else {
@@ -101,45 +106,35 @@ namespace assignment_5
                     }
                 }
                 else{
-                    if(c >= alphabet.indexOf('a') && c <= alphabet.indexOf('z')) {
+                    if(char.IsLetterOrDigit(c) && alphabet.indexOf(c) >= alphabet.indexOf('a') && alphabet.indexOf(c) <= alphabet.indexOf('z')) {
                         // Change current, symbol and state
-                        char next = regex[idx +1];
+                        char next = idx+1 != regex.Length ? regex[idx +1] : regex[idx];
 
                         if(next != '|' && parentheses == false){
                             table[current, alphabet.indexOf(c)] = states.ElementAt(nextState);
                             current = nextState;
-                            totalStates++;
                             nextState++;
                         } else {
                             table[current, alphabet.indexOf(c)] = states.ElementAt(nextState);
                         }
-                        
-                        // table[current, c] = states.ElementAt(2);
                     }
                     else if(c == '(' ) {
                         if(parentheses == false) {
-                            totalStates++;
                             parentheses = true; 
                         }
 
                         else if(parentheses == true)
                             parenthesesCount++;
-                        // Change current, symbol
                     }
                     else if(c == ')') {
-                        // Change current, symbol
                         if(parenthesesCount == 0)
                             parentheses = false; 
                         else
                             parenthesesCount--;
                     }
-                    // else if(c == '*') {
-                    //     // Change current, symbol
-                    //     table[1, 1] = states.ElementAt(1);
-                    //     table[1, 2] = states.ElementAt(1);
-                    // }
                     idx++;
                 }
+                if(c == regex.Last()) isFinal = true;
             }
 
             
